@@ -12,3 +12,12 @@ export async function savePlayer(name: string, species: Species, player_class: C
     await playerRepository.save(newPlayer);
     return newPlayer;
 }
+
+export async function findPlayerById(playerId: number) {
+    const player: Player | null = await playerRepository.findOne({
+        where: {
+            id: playerId
+        }
+    });
+    return player;
+}

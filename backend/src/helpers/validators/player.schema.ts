@@ -2,7 +2,7 @@ import Joi from "joi";
 import { numberMessages, stringMessages } from "./validations.config";
 import { Classes, Species } from "../../entities/Player";
 
-export const playerSchema = Joi.object({
+export const createPlayerSchema = Joi.object({
     name: Joi.string().min(3).max(20).required().messages(stringMessages),
     species: Joi.string().valid(...Object.values(Species)).required().messages(stringMessages),
     player_class: Joi.string().valid(...Object.values(Classes)).required().messages(stringMessages), // Usando valid en lugar de allow

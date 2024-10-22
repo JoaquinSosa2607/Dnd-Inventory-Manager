@@ -1,6 +1,6 @@
 import { Classes, Species } from "../../entities/Player";
 
-export interface PlayerInterface {
+export interface CreatePlayerInterface {
     name: string;
     species: Species;
     player_class: Classes;
