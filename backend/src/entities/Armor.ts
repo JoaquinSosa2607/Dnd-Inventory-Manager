@@ -1,4 +1,4 @@
-import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Player } from "./Player";
 
 export enum TypeOfArmor {
@@ -27,4 +27,7 @@ export class Armor {
 
     @Column()
     stealth: string; 
+
+    @ManyToMany(() => Player, (player) => player.armors)
+    players: Player[]; 
 }

@@ -17,6 +17,9 @@ export async function findPlayerById(playerId: number) {
     const player: Player | null = await playerRepository.findOne({
         where: {
             id: playerId
+        },
+        relations: {
+            armors: true
         }
     });
     return player;

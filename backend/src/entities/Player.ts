@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Armor } from "./Armor";
 
 export enum Species {
     Dragonborn = "Dragonborn",
@@ -44,4 +45,8 @@ export class Player {
 
     @Column()
     level: number;
+
+    @ManyToMany(() => Armor, (armor) => armor.players)
+    @JoinTable({ name: "armor_player" })
+    armors: Armor[];
 }

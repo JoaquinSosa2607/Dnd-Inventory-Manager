@@ -3,6 +3,7 @@ import { createPlayer, getAllPlayers, getPlayerById } from "../controllers/playe
 
 const router = Router();
 
+// POST
 router.post("/create-player", createPlayer);
 
 //GET
