@@ -1,7 +1,12 @@
 import express from "express";
 import { AppDataSource } from "./db";
 import { PORT } from "./env";
+import playerRoutes from "./routes/player.routes"
 const app = express();
+
+app.use(express.json());
+
+app.use("/player", playerRoutes);
 
 async function main() {
     try {

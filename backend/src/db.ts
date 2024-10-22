@@ -1,6 +1,7 @@
 import dotenv from "dotenv"
 import { DataSource } from "typeorm";
 import { DB_HOST, DB_NAME, DB_PORT, DB_USER, MYSQL_PASSW, PORT } from "./env";
+import { Player } from "./entities/Player";
 
 dotenv.config();
 
@@ -11,7 +12,9 @@ export const AppDataSource = new DataSource({
     password: MYSQL_PASSW,
     port: DB_PORT,
     database: DB_NAME,
-    entities: [],
+    entities: [
+        Player
+    ],
     logging: true,
     synchronize: true
 });
