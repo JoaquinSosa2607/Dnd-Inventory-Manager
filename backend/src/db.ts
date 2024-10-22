@@ -3,6 +3,9 @@ import { DataSource } from "typeorm";
 import { DB_HOST, DB_NAME, DB_PORT, DB_USER, MYSQL_PASSW, PORT } from "./env";
 import { Player } from "./entities/Player";
 import { Armor } from "./entities/Armor";
+import { Weapon } from "./entities/Weapon";
+import { Campaign } from "./entities/Campaign";
+import { User } from "./entities/User";
 
 dotenv.config();
 
@@ -15,7 +18,10 @@ export const AppDataSource = new DataSource({
     database: DB_NAME,
     entities: [
         Player,
-        Armor
+        Armor,
+        Weapon,
+        Campaign,
+        User
     ],
     logging: true,
     synchronize: true

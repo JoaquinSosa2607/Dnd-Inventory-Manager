@@ -1,11 +1,12 @@
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Player } from "./Player";
+import { Campaign } from "./Campaign";
 
 export enum TypeOfArmor {
-    Light_Armor = "Light Armor",
-    Medium_Armor = "Medium Armor",
-    Heavy_Armor = "Heavy Armor",
-    Shield = "Shield"
+    Light_Armor = "Armadura Ligera",
+    Medium_Armor = "Armadura Mediana",
+    Heavy_Armor = "Armadura Pesada",
+    Shield = "Escudo" 
 }
 
 @Entity()
@@ -30,4 +31,8 @@ export class Armor {
 
     @ManyToMany(() => Player, (player) => player.armors)
     players: Player[]; 
+
+    @ManyToOne(() => Campaign, (campaign) => campaign.armor)
+    @JoinColumn({ name: "campaign_id"})
+    campaign: Campaign;
 }
