@@ -21,7 +21,7 @@ export class User {
     @Column({ default: "USER_ROLE" })
     role: string;
 
-    @Column({ nullable: true })
+    @Column({ type: 'mediumtext', nullable: true })
     refreshToken: string;
 
     @Column({ nullable: true })
