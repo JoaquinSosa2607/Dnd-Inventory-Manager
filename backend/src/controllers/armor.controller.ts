@@ -29,9 +29,11 @@ export const addArmorToInventory = async (req: Request, res: Response) => {
         await playerRepository.save(player);
 
         res.status(200).send({ message: "Armadura agregada correctamente." });
+        return;
     } catch (error) {
         if (error instanceof Error) {
             res.status(500).send({ message: error.message });
+            return;
         }
     }
 }
@@ -44,9 +46,11 @@ export const getAllArmors = async (req: Request, res: Response) => {
             throw new Error("No hay armaduras registradas.");
         }
         res.status(200).json({ Armors: armors });
+        return;
     } catch (error) {
         if (error instanceof Error) {
             res.status(500).send({ message: error.message });
+            return;
         }
     }
 }

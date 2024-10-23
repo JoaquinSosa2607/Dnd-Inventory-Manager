@@ -12,11 +12,12 @@ export const createPlayer = async (req: Request, res: Response) => {
     
         const player: Player = await savePlayer(name, species, player_class, level);
         res.status(201).send({ message: `Personaje creado con éxito, bienvenido ${player.name}!` });
-    
+        return;
        
     } catch (error) {
         if (error instanceof Error) {
             res.status(500).send({ message: error.message });
+            return;
         }
     }
 };
@@ -27,9 +28,11 @@ export const getAllPlayers = async (req: Request, res: Response) => {
         if (players.length === 0) res.status(404).send({ message: "No hay personajes registrados." });
 
         res.status(200).json({ Players: players });
+        return;
     } catch (error) {
         if (error instanceof Error) {
             res.status(500).send({ message: error.message });
+            return;
         }
     }
 };

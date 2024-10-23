@@ -13,9 +13,11 @@ export const createUser = async (req: Request, res: Response) => {
         await createUserSchema.validateAsync(req.body);
         const user: User = await signUp(firstname, lastname, email, password);
         res.status(201).send({ message: `Usuario creado correctamente. Bienvendio ${user.firstname}!` });
+        return;
     } catch (error) {
         if (error instanceof Error) {
             res.status(500).json({ message: error.message });
+            return;
         }
     }
 }
@@ -31,9 +33,11 @@ export const signInUser = async (req: Request, res: Response) => {
         }
         const token: ITokenAuthAndRefresh = await tokenSignUser(user);
         res.status(200).json({ Tokens: { authToken: token.authToken, refreshToken: token.refreshToken } });
+        return;
     } catch (error) {
         if (error instanceof Error) {
             res.status(500).json({ message: error.message });
+            return;
         }
     }
 }
