@@ -20,14 +20,13 @@ export default {
     components: {
         NavBar,
         CharacterComponent,
-    },
-};
+    }
+}
 </script>
 
 <style>
 
 .main {
-    margin: 20px;
     background-color: rgba(255, 255, 255, 0.733);
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
