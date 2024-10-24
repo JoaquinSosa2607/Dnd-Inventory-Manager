@@ -55,14 +55,11 @@
             try {
             const url = this.isLogin ? "http://localhost:4040/auth/sign-in" : "http://localhost:4040/auth/sign-up";
             const payload = this.isLogin ? { email: this.email, password: this.password } : { email: this.email, password: this.password, firstname: this.firstname, lastname: this.lastname };
-            console.log(url)
-            console.log(payload)
     
             const response = await axios.post(url, payload);
             
     
             if (this.isLogin) {
-                console.log(response)
                 this.userStore.login(response); 
                 this.$router.push('home');
             } else {
@@ -70,7 +67,7 @@
                 this.isLogin = true;
             }
             } catch (error) {
-            alert(error.response?.data.message || "Ocurrió un error.");
+                alert(error.response?.data.message || "Ocurrió un error.");
             }
         },
         toggleMode() {

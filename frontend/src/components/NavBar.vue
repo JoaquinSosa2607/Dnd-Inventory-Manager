@@ -2,9 +2,7 @@
     <nav class="nav-bar">
         <h2>Bienvenido!</h2>
         <ul>
-            <li><router-link to="/inventory">Inventario</router-link></li>
-            <li><router-link to="/characters">Personajes</router-link></li>
-            <li><router-link to="/profile">Perfil</router-link></li>
+            <li><router-link :to="{ name: 'InventoryView'}">Inventario</router-link></li>
         </ul>
     </nav>
 </template>
