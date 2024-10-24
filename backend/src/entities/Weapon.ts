@@ -1,11 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-
-export enum TypeOfWeapon {
-    Simple = "Simple",
-    Distance_Simple = "Distance, Simple",
-    Martial = "Martial",
-    Distance_Martial = "Distance, Martial"
-}
+import { TypeOfWeapon } from "../helpers/enums";
 
 @Entity()
 export class Weapon {

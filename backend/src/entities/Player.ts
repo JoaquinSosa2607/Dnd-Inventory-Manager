@@ -2,33 +2,7 @@ import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGe
 import { Armor } from "./Armor";
 import { Campaign } from "./Campaign";
 import { User } from "./User";
-
-export enum Species {
-    Dragonborn = "Dracónido",
-    Dwarf = "Enano",
-    Elf = "Elfo",
-    Gnome = "Gnomo",
-    Half_Elf = "Semi Elfo",
-    Halfling = "Mediano",
-    Half_Orc = "Semi Orco",
-    Human = "Humano",
-    Tiefling = "Tiefling"
-}
-
-export enum Classes {
-    Barbarian = "Bárbaro",
-    Bard = "Bardo",
-    Cleric = "Clérigo",
-    Druid = "Druida",
-    Fighter = "Peleador",
-    Monk = "Monje",
-    Paladin = "Paladín",
-    Ranger = "Explorador",
-    Rogue = "Pícaro",
-    Sorcerer = "Mago",
-    Warlock = "Brujo",
-    Wizard = "Hechicero"
-}
+import { Classes, Species } from "../helpers/enums";
 
 
 @Entity()

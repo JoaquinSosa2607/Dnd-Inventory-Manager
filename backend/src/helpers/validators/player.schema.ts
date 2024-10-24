@@ -1,6 +1,6 @@
 import Joi from "joi";
 import { numberMessages, stringMessages } from "./validations.config";
-import { Classes, Species } from "../../entities/Player";
+import { Classes, Species } from "../enums";
 
 export const createPlayerSchema = Joi.object({
     name: Joi.string().min(3).max(20).required().messages(stringMessages),

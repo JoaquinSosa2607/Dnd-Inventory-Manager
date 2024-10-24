@@ -1,13 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Player } from "./Player";
 import { Campaign } from "./Campaign";
-
-export enum TypeOfArmor {
-    Light_Armor = "Armadura Ligera",
-    Medium_Armor = "Armadura Mediana",
-    Heavy_Armor = "Armadura Pesada",
-    Shield = "Escudo" 
-}
+import { TypeOfArmor } from "../helpers/enums";
 
 @Entity()
 export class Armor {
