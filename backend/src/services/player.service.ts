@@ -29,3 +29,14 @@ export async function findPlayerById(playerId: number) {
     });
     return player;
 }
+
+export async function findUserPlayers(userId: number) {
+    const players: Player[] = await playerRepository.find({
+        where: {
+            user: {
+                id: userId
+            }
+        }
+    });
+    return players;
+}
