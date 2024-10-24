@@ -4,30 +4,30 @@ import { Campaign } from "./Campaign";
 import { User } from "./User";
 
 export enum Species {
-    Dragonborn = "Dragonborn",
-    Dwarf = "Dwarf",
-    Elf = "Elf",
-    Gnome = "Gnome",
-    Half_Elf = "Half Elf",
-    Halfling = "Halfling",
-    Half_Orc = "Half Orc",
-    Human = "Human",
+    Dragonborn = "Dracónido",
+    Dwarf = "Enano",
+    Elf = "Elfo",
+    Gnome = "Gnomo",
+    Half_Elf = "Semi Elfo",
+    Halfling = "Mediano",
+    Half_Orc = "Semi Orco",
+    Human = "Humano",
     Tiefling = "Tiefling"
 }
 
 export enum Classes {
-    Barbarian = "Barbarian",
-    Bard = "Bard",
-    Cleric = "Cleric",
-    Druid = "Druid",
-    Fighter = "Fighter",
-    Monk = "Monk",
-    Paladin = "Paladin",
-    Ranger = "Ranger",
-    Rogue = "Rogue",
-    Sorcerer = "Sorcerer",
-    Warlock = "Warlock",
-    Wizard = "Wizard"
+    Barbarian = "Bárbaro",
+    Bard = "Bardo",
+    Cleric = "Clérigo",
+    Druid = "Druida",
+    Fighter = "Peleador",
+    Monk = "Monje",
+    Paladin = "Paladín",
+    Ranger = "Explorador",
+    Rogue = "Pícaro",
+    Sorcerer = "Mago",
+    Warlock = "Brujo",
+    Wizard = "Hechicero"
 }
 
 
