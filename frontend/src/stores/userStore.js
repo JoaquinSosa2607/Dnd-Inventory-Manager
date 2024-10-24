@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import Cookies from "js-cookie";
 
 export const useUserStore = defineStore("user", {
     state: () => ({
@@ -9,13 +10,13 @@ export const useUserStore = defineStore("user", {
     }),
 
     actions: {
-        login(response) {
-            this.email = response.email;
+        login(payload, response) {
+            this.email = payload.email;
             this.isLoggedIn = true;
-            this.authToken = response.authToken;
-            this.refreshToken = response.refreshToken;
+            
+            Cookies.set('authToken', response.data.Tokens.authToken, { secure: true, sameSite: 'Strict' });
+            Cookies.set('refreshToken', response.data.Tokens.refreshToken, { secure: true, sameSite: 'Strict' });
         },
-
         logout() {
             this.email = "";
             this.isLoggedIn = false;

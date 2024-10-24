@@ -42,41 +42,41 @@
     
     export default {
         data() {
-        return {
-            email: '',
-            password: '',
-            firstname: '',
-            lastname: '',
-            isLogin: true,
-        };
+            return {
+                email: '',
+                password: '',
+                firstname: '',
+                lastname: '',
+                isLogin: true,
+            };
         },
         methods: {
-        async handleSubmit() {
-            try {
-            const url = this.isLogin ? "http://localhost:4040/auth/sign-in" : "http://localhost:4040/auth/sign-up";
-            const payload = this.isLogin ? { email: this.email, password: this.password } : { email: this.email, password: this.password, firstname: this.firstname, lastname: this.lastname };
-    
-            const response = await axios.post(url, payload);
+            async handleSubmit() {
+                try {
+                    const url = this.isLogin ? "http://localhost:4040/auth/sign-in" : "http://localhost:4040/auth/sign-up";
+                    const payload = this.isLogin ? { email: this.email, password: this.password } : { email: this.email, password: this.password, firstname: this.firstname, lastname: this.lastname };
             
-    
-            if (this.isLogin) {
-                this.userStore.login(response); 
-                this.$router.push('home');
-            } else {
-                alert("Usuario registrado exitosamente. Ahora puedes iniciar sesión.");
-                this.isLogin = true;
+                    const response = await axios.post(url, payload);
+                    console.log(response)
+                    
+                    if (this.isLogin) {
+                        this.userStore.login(payload, response);
+                        this.$router.push('home');
+                    } else {
+                        alert("Usuario registrado exitosamente. Ahora puedes iniciar sesión.");
+                        this.isLogin = true;
+                    }
+                } catch (error) {
+                    alert(error.response?.data.message || "Ocurrió un error.");
+                }
+            },
+            toggleMode() {
+                this.isLogin = !this.isLogin;
             }
-            } catch (error) {
-                alert(error.response?.data.message || "Ocurrió un error.");
-            }
-        },
-        toggleMode() {
-            this.isLogin = !this.isLogin;
-        }
         },
         setup() {
-        const userStore = useUserStore();
-        return { userStore };
+            const userStore = useUserStore();
+            return { userStore };
         }
     };
 </script>
