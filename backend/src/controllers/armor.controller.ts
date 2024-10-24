@@ -16,13 +16,13 @@ export const addArmorToInventory = async (req: Request, res: Response) => {
         const armor: Armor | null = await findArmorById(armorId);
         if(!armor) {
             res.status(404).send({ message: "Armadura no registrada." });
-            throw new Error("Armadura no registrada." );
+            return;
         }
 
         const player: Player | null = await findPlayerById(playerId);
         if(!player) {
             res.status(404).send({ message: "Personaje no registrado." });
-            throw new Error("Personaje no registrado." );
+            return;
         }
 
         player.armors = [armor];
@@ -43,7 +43,7 @@ export const getAllArmors = async (req: Request, res: Response) => {
         const armors: Armor[] = await armorRepository.find();
         if(armors.length === 0) {
             res.status(404).send({ message: "No hay armaduras registradas." });
-            throw new Error("No hay armaduras registradas.");
+            return;
         }
         res.status(200).json({ Armors: armors });
         return;
