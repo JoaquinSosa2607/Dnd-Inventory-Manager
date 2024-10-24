@@ -30,6 +30,7 @@ export const signInUser = async (req: Request, res: Response) => {
         const isPasswordValid: boolean = await validatePassword(password, userPassword);
         if (!isPasswordValid) {
             res.status(401).send({ message: "Contraseña incorrecta" });
+            return;
         }
         const token: ITokenAuthAndRefresh = await tokenSignUser(user);
         res.status(200).json({ Tokens: { authToken: token.authToken, refreshToken: token.refreshToken } });

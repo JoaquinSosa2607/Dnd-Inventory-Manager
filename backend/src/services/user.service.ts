@@ -24,3 +24,12 @@ export async function signIn(email: string) {
     }
     return user;
 }
+
+export async function findUserById(userId: number) {
+    const user: User | null = await userRepository.findOne({
+        where: {
+            id: userId
+        }
+    });
+    return user;
+}
