@@ -28,9 +28,6 @@ export const isUserRole = (req: Request, res: Response, next: NextFunction) => {
         if (error instanceof jwt.TokenExpiredError) {
             res.status(500).send({ message: "Token de usuario expirado" });
             return;
-        } else {
-            // Error al verificar el token
-            console.error(error);
         }
         res.status(500).send({ message: "Error al verificar el token" });
         return;
