@@ -7,6 +7,7 @@ import helmet from "helmet";
 import playerRoutes from "./routes/player.routes"
 import armorRoutes from "./routes/armor.routes"
 import authRoutes from "./routes/auth.routes"
+import campaignRoutes from "./routes/campaign.routes"
 const app = express();
 
 
@@ -26,6 +27,7 @@ app.use(helmet());
 app.use("/auth", authRoutes);
 app.use("/player", playerRoutes);
 app.use("/armor", armorRoutes);
+app.use("/campaigns", campaignRoutes);
 
 async function main() {
     try {
