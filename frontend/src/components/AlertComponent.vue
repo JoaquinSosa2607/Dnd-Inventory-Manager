@@ -13,7 +13,7 @@
 import { useModalStore } from '@/stores/modalStore';
 
 export default {
-    setup() {
+    data() {
         const modalStore = useModalStore();
 
         return {

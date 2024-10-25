@@ -57,7 +57,6 @@
                     const payload = this.isLogin ? { email: this.email, password: this.password } : { email: this.email, password: this.password, firstname: this.firstname, lastname: this.lastname };
             
                     const response = await axios.post(url, payload);
-                    console.log(response)
                     
                     if (this.isLogin) {
                         this.userStore.login(payload, response);

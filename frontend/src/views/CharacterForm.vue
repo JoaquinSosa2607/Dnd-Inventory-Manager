@@ -1,5 +1,4 @@
 <template>
-    <NavBar> <button></button></NavBar>
     <div class="container">
         <div class="main-form">
             <h2>Agregar un personaje</h2>
@@ -9,13 +8,13 @@
                     <input
                         type="text"
                         id="name"
-                        v-model="player.name"
+                        v-model="character.name"
                         required
                     />
                 </div>
                 <div>
                     <label for="species">Especie</label>
-                    <select v-model="player.species" id="species" required>
+                    <select v-model="character.species" id="species" required>
                         <option
                             v-for="species in speciesList"
                             :key="species.id"
@@ -27,19 +26,19 @@
                 </div>
                 <div>
                     <label for="classes">Clase</label>
-                    <select v-model="player.player_class" id="classes" required>
+                    <select v-model="character.character_class" id="classes" required>
                         <option
-                            v-for="player_class in classesList"
-                            :key="player_class.id"
-                            :value="player_class"
+                            v-for="character_class in classesList"
+                            :key="character_class.id"
+                            :value="character_class"
                         >
-                            {{ player_class }}
+                            {{ character_class }}
                         </option>
                     </select>
                 </div>
                 <div>
                     <label for="campaign">Camapaña</label>
-                    <select v-model="player.campaign" id="campaign" required>
+                    <select v-model="character.campaign" id="campaign" required>
                         <option
                             v-for="campaign in campaigns"
                             :key="campaign.id"
@@ -53,7 +52,7 @@
                     <label for="level">Nivel</label>
                     <input
                         type="number"
-                        v-model="player.level"
+                        v-model="character.level"
                         min="1"
                         max="20"
                         required
@@ -72,9 +71,7 @@
 <script>
 import Cookies from "js-cookie";
 import axios from "axios";
-import NavBar from "@/components/NavBar.vue";
 import AlertComponent from "@/components/AlertComponent.vue";
-import router from "@/router";
 import { useModalStore } from "@/stores/modalStore";
 
 export default {
@@ -82,10 +79,10 @@ export default {
         const modalStore = useModalStore()
         return {
             modalStore,
-            player: {
+            character: {
                 name: "",
                 species: "",
-                player_class: "",
+                character_class: "",
                 campaign: null,
                 level: 1,
             },
@@ -103,7 +100,7 @@ export default {
                 const response = await axios.get(
                     "http://localhost:4040/campaigns/all-campaigns"
                 );
-                this.campaigns = response.data.Campaigns;
+                this.campaigns = response.data.campaigns;
             } catch (error) {
                 this.modalStore.openModal("Error obteniendo las campañas", error.message);
             }
@@ -127,8 +124,8 @@ export default {
                 }
 
                 await axios.post(
-                    "http://localhost:4040/player/create-player",
-                    this.player,
+                    "http://localhost:4040/character/create-character",
+                    this.character,
                     {
                         headers: { "auth-header": `${token}` },
                     }
@@ -143,7 +140,7 @@ export default {
             this.goBack();
         },
         goBack() {
-            router.push('home');
+            this.$router.push('home');
         }
     },
     mounted() {
@@ -151,7 +148,6 @@ export default {
         this.getSpeciesAndClasses();
     },
     components: {
-        NavBar,
         AlertComponent
     },
 };
@@ -174,9 +170,10 @@ export default {
     padding: 20px 30px;
     max-width: 600px;
     text-align: left;
-    position: relative;
-    max-height: 90vh;
+    max-height: 100vh;
     overflow-y: auto;
+    align-self: center;
+    align-items: center;
 }
 
 input,

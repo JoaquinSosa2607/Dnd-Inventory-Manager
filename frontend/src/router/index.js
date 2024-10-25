@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '@/views/LoginView.vue'
-import InventoryComponent from '@/components/InventoryComponent.vue'
 import CharacterForm from '@/views/CharacterForm.vue'
+import InventoryView from '@/views/InventoryView.vue'
 
 const routes = [
     {
@@ -16,9 +16,10 @@ const routes = [
         component: HomeView,
     },
     {
-        path: '/inventory',
+        path: '/inventory/:id',
         name: 'InventoryView',
-        component: InventoryComponent
+        component: InventoryView,
+        props: true
     },
     {
         path: '/create-character',

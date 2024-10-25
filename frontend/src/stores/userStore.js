@@ -14,8 +14,8 @@ export const useUserStore = defineStore("user", {
             this.email = payload.email;
             this.isLoggedIn = true;
             
-            Cookies.set('authToken', response.data.Tokens.authToken, { secure: true, sameSite: 'Strict' });
-            Cookies.set('refreshToken', response.data.Tokens.refreshToken, { secure: true, sameSite: 'Strict' });
+            Cookies.set('authToken', response.data.tokens.authToken, { secure: true, sameSite: 'Strict' });
+            Cookies.set('refreshToken', response.data.tokens.refreshToken, { secure: true, sameSite: 'Strict' });
         },
         logout() {
             this.email = "";

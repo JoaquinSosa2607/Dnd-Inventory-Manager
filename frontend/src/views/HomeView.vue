@@ -4,6 +4,7 @@
         <router-link :to="{ name: 'CharacterForm'}" class="btn btn-danger">
             <h3>Agregar Personaje</h3>
         </router-link>
+        <button class="btn btn-danger" @click="deleteCharacter(character.id)">Detalles</button>
     </div>
     <div class="characters">
         <CharacterComponent></CharacterComponent>
