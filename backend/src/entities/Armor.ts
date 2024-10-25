@@ -1,5 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Player } from "./Player";
+import { Character } from "./Character";
 import { Campaign } from "./Campaign";
 import { TypeOfArmor } from "../helpers/enums";
 
@@ -23,8 +23,8 @@ export class Armor {
     @Column()
     stealth: string; 
 
-    @ManyToMany(() => Player, (player) => player.armors)
-    players: Player[]; 
+    @ManyToMany(() => Character, (character) => character.armors)
+    characters: Character[]; 
 
     @ManyToOne(() => Campaign, (campaign) => campaign.armor)
     @JoinColumn({ name: "campaign_id"})

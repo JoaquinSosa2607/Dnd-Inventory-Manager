@@ -2,16 +2,16 @@ import { Request, Response } from "express";
 import { AddArmorInterface } from "../helpers/interfaces/armor.interface";
 import { addArmorSchema } from "../helpers/validators/armor.schema";
 import { Armor } from "../entities/Armor";
-import { armorRepository, playerRepository } from "../config/repository/repository";
+import { armorRepository, characterRepository } from "../config/repository/repository";
 import { findArmorById } from "../services/armor.service";
-import { Player } from "../entities/Player";
-import { findPlayerById } from "../services/player.service";
+import { Character } from "../entities/Character";
+import { findCharacterById } from "../services/character.service";
 
 export const addArmorToInventory = async (req: Request, res: Response) => {
 
     try {
         await addArmorSchema.validate(req.body);
-        const { armorId, playerId }: AddArmorInterface = req.body;
+        const { armorId, characterId }: AddArmorInterface = req.body;
 
         const armor: Armor | null = await findArmorById(armorId);
         if(!armor) {
@@ -19,14 +19,14 @@ export const addArmorToInventory = async (req: Request, res: Response) => {
             return;
         }
 
-        const player: Player | null = await findPlayerById(playerId);
-        if(!player) {
+        const character: Character | null = await findCharacterById(characterId);
+        if(!character) {
             res.status(404).send({ message: "Personaje no registrado." });
             return;
         }
 
-        player.armors = [armor];
-        await playerRepository.save(player);
+        character.armors = [armor];
+        await characterRepository.save(character);
 
         res.status(200).send({ message: "Armadura agregada correctamente." });
         return;

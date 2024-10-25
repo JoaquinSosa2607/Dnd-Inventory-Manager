@@ -1,19 +1,19 @@
 import { Request, Response } from "express";
-import { CreatePlayerInterface } from "../helpers/interfaces/player.interface";
-import { createPlayerSchema } from "../helpers/validators/player.schema";
-import { Player } from "../entities/Player";
-import { findPlayerById, findUserPlayers, savePlayer } from "../services/player.service";
-import { playerRepository } from "../config/repository/repository";
+import { CreateCharacterInterface } from "../helpers/interfaces/character.interface";
+import { createCharacterSchema } from "../helpers/validators/character.schema";
+import { Character } from "../entities/Character";
+import { findCharacterById, findUserCharacters, saveCharacter } from "../services/character.service";
+import { characterRepository } from "../config/repository/repository";
 import { User } from "../entities/User";
 import { findUserById } from "../services/user.service";
 import { IPayload } from "../middlewares";
 import { extractPayload } from "../helpers/token/extractPayload";
 import { Classes, Species } from "../helpers/enums";
 
-export const createPlayer = async (req: Request, res: Response) => {
+export const createCharacter = async (req: Request, res: Response) => {
     try {
-        await createPlayerSchema.validate(req.body);
-        const { name, species, player_class, level, campaign }: CreatePlayerInterface =
+        await createCharacterSchema.validate(req.body);
+        const { name, species, character_class, level, campaign }: CreateCharacterInterface =
             req.body;
 
         const payload: IPayload | null = extractPayload(req);
@@ -28,16 +28,16 @@ export const createPlayer = async (req: Request, res: Response) => {
             return;
         }
 
-        const player: Player = await savePlayer(
+        const character: Character = await saveCharacter(
             name,
             species,
-            player_class,
+            character_class,
             level,
             user,
             campaign
         );
         res.status(201).send({
-            message: `Personaje creado con éxito, bienvenido ${player.name}!`,
+            message: `Personaje creado con éxito, bienvenido ${character.name}!`,
         });
         return;
     } catch (error) {
@@ -48,15 +48,15 @@ export const createPlayer = async (req: Request, res: Response) => {
     }
 };
 
-export const getAllPlayers = async (req: Request, res: Response) => {
+export const getAllCharacters = async (req: Request, res: Response) => {
     try {
-        const players: Player[] = await playerRepository.find();
-        if (players.length === 0) {
+        const characters: Character[] = await characterRepository.find();
+        if (characters.length === 0) {
             res.status(404).send({ message: "No hay personajes registrados." });
             return;
         }
 
-        res.status(200).json({ Players: players });
+        res.status(200).json({ Characters: characters });
         return;
     } catch (error) {
         if (error instanceof Error) {
@@ -66,17 +66,17 @@ export const getAllPlayers = async (req: Request, res: Response) => {
     }
 };
 
-export const getPlayerById = async (req: Request, res: Response) => {
+export const getCharacterById = async (req: Request, res: Response) => {
     try {
-        const playerId = parseInt(req.params.playerId);
+        const characterId = parseInt(req.params.playerId);
 
-        const player = await findPlayerById(playerId);
-        if (!player) {
+        const character = await findCharacterById(characterId);
+        if (!character) {
             res.status(404).send({ message: "Personaje no encontrado." });
             return;
         }
 
-        res.status(200).json({ Player: player });
+        res.status(200).json({ Character: character });
         return;
     } catch (error) {
         if (error instanceof Error) {
@@ -86,7 +86,7 @@ export const getPlayerById = async (req: Request, res: Response) => {
     }
 };
 
-export const getUserPlayers = async (req: Request, res: Response) => {
+export const getUserCharacters = async (req: Request, res: Response) => {
     try {
         const payload: IPayload | null = extractPayload(req);
         if (!payload) {
@@ -100,13 +100,13 @@ export const getUserPlayers = async (req: Request, res: Response) => {
             return;
         }
 
-        const userPlayers: Player[] = await findUserPlayers(user.id);
-        if(userPlayers.length === 0) {
+        const userCharacter: Character[] = await findUserCharacters(user.id);
+        if(userCharacter.length === 0) {
             res.status(404).send({ message: "No tienes personajes registrados." });
             return;
         }
 
-        res.status(200).json({ Players: userPlayers });
+        res.status(200).json({ Characters: userCharacter });
         return;
     } catch (error) {
         if (error instanceof Error) {

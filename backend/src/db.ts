@@ -1,7 +1,7 @@
 import dotenv from "dotenv"
 import { DataSource } from "typeorm";
 import { DB_HOST, DB_NAME, DB_PORT, DB_USER, MYSQL_PASSW, PORT } from "./env";
-import { Player } from "./entities/Player";
+import { Character } from "./entities/Character";
 import { Armor } from "./entities/Armor";
 import { Weapon } from "./entities/Weapon";
 import { Campaign } from "./entities/Campaign";
@@ -17,7 +17,7 @@ export const AppDataSource = new DataSource({
     port: DB_PORT,
     database: DB_NAME,
     entities: [
-        Player,
+        Character,
         Armor,
         Weapon,
         Campaign,

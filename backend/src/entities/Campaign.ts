@@ -1,5 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Player } from "./Player";
+import { Character } from "./Character";
 import { Armor } from "./Armor";
 
 @Entity()
@@ -13,8 +13,8 @@ export class Campaign {
     @Column()
     description: string;
 
-    @OneToMany(() => Player, (player) => player.campaign)
-    player: Player[];
+    @OneToMany(() => Character, (character) => character.campaign)
+    character: Character[];
 
     @OneToMany(() => Armor, (armor) => armor.campaign)
     armor: Armor[];

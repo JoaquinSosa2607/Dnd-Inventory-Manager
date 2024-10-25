@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { getAllCampaigns } from "../controllers/campaign.controller";
-import { getEnums } from "../controllers/player.controller";
+import { getEnums } from "../controllers/character.controller";
 
 const router = Router();
 

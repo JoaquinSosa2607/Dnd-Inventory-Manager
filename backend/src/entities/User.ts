@@ -1,5 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Player } from "./Player";
+import { Character } from "./Character";
 
 @Entity()
 export class User {
@@ -27,6 +27,6 @@ export class User {
     @Column({ nullable: true })
     resetPasswordToken: string;
 
-    @OneToMany(() => Player, (player) => player.user)
-    player: Player[];
+    @OneToMany(() => Character, (character) => character.user)
+    character: Character[];
 }

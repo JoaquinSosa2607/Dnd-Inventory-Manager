@@ -4,7 +4,7 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import helmet from "helmet";
-import playerRoutes from "./routes/player.routes"
+import characterRoutes from "./routes/character.routes"
 import armorRoutes from "./routes/armor.routes"
 import authRoutes from "./routes/auth.routes"
 import campaignRoutes from "./routes/campaign.routes"
@@ -25,7 +25,7 @@ app.use(express.json());
 app.use(helmet());
 
 app.use("/auth", authRoutes);
-app.use("/player", playerRoutes);
+app.use("/character", characterRoutes);
 app.use("/armor", armorRoutes);
 app.use("/campaigns", campaignRoutes);
 

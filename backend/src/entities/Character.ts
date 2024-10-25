@@ -6,7 +6,7 @@ import { Classes, Species } from "../helpers/enums";
 
 
 @Entity()
-export class Player {
+export class Character {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -17,16 +17,16 @@ export class Player {
     species: Species;
 
     @Column({ type: 'enum', enum: Classes })
-    player_class: Classes;
+    character_class: Classes;
 
     @Column()
     level: number;
 
-    @ManyToMany(() => Armor, (armor) => armor.players)
+    @ManyToMany(() => Armor, (armor) => armor.characters)
     @JoinTable({ name: "armor_player" })
     armors: Armor[];
 
-    @ManyToOne(() => Campaign, (campaign) => campaign.player)
+    @ManyToOne(() => Campaign, (campaign) => campaign.character)
     @JoinColumn({ name: "campaign_id"})
     campaign: Campaign;
 
