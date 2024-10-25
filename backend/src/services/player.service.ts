@@ -36,6 +36,9 @@ export async function findUserPlayers(userId: number) {
             user: {
                 id: userId
             }
+        },
+        relations: {
+            campaign: true
         }
     });
     return players;

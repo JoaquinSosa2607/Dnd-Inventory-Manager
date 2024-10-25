@@ -1,14 +1,15 @@
 <template>
-    <NavBar />
-    <div class="main">
-        <h2>Al inventario de qué personaje quieres acceder?</h2>
+    <NavBar :in-home="true"/>
+    <div class="add-character">
+        <router-link :to="{ name: 'CharacterForm'}" class="btn btn-danger">
+            <h3>Agregar Personaje</h3>
+        </router-link>
     </div>
     <div class="characters">
         <CharacterComponent></CharacterComponent>
     </div>
-    <div class="add-character">
-        <router-link :to="{ name: 'CharacterForm'}" class="btn btn-danger">Agregar Personaje</router-link>
-    </div>
+    
+    
 </template>
 
 <script>
@@ -24,9 +25,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 .main {
+    margin-top: 10px;
     background-color: rgba(255, 255, 255, 0.733);
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
@@ -38,7 +40,6 @@ export default {
     justify-self: center;
 }
 .characters {
-    margin: 20px;
     background-color: none;
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
@@ -51,7 +52,8 @@ export default {
     display: flex;
 }
 
-.add-character{
+.add-character {
     justify-self: center;
+    margin-top: 20px;
 }
 </style>

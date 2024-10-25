@@ -1,27 +1,36 @@
 <template>
     <div class="character-list">
-        <!-- Iterar sobre los personajes obtenidos -->
         <div v-for="player in players" :key="player.id" class="card" style="width: 18rem">
-            <img :src="player.image" class="card-img-top" alt="Character Image" />
+            <hr>
+            <img :src="getClassIcon(player.player_class)" class="card-img-top" alt="Icono de Personaje" />
+            <hr>
             <div class="card-body">
-                <h5 class="card-title">{{ player.name }}</h5>
-                <p class="card-text">Clase: {{ player.player_class }}</p>
-                <p class="card-text">Especie: {{ player.species }}</p>
-                <p class="card-text">Nivel: {{ player.level }}</p>
-                <a href="#" class="btn btn-primary">Ver más detalles</a>
+                <h3 class="card-title">{{ player.name }} : {{ player.player_class }}</h3>
+                <p><strong>Campaña: {{ player.campaign.title }}</strong></p>
+                <div class="buttons">
+                    <button class="btn btn-danger" @click="showDetails(player.id)">Detalles</button>
+                    <router-link class="btn btn-danger">Inventario</router-link>
+                </div>
             </div>
         </div>
     </div>
+    <AlertComponent v-if="modalStore.showModal" :title="modalStore.modalTitle" :message="modalStore.modalMessage" @close="closeModal">
+    </AlertComponent>
 </template>
 
 <script>
 import Cookies from "js-cookie";
-import axios from "axios";
+import apiClient from "@/services/databaseService";
+import AlertComponent from "./AlertComponent.vue";
+import { useModalStore } from "@/stores/modalStore";
 
 export default {
     data() {
+        const modalStore = useModalStore();
         return {
+            modalStore,
             players: [],
+            playerDetails: null
         };
     },
     methods: {
@@ -29,25 +38,45 @@ export default {
             try {
                 const token = Cookies.get('authToken');
                 if (!token) {
-                    throw new Error("Token no encontrado. Debes iniciar sesión.");
+                    this.modalStore.openModal("Token no encontrado", "Debes iniciar sesión.");
                 }
-
-                const response = await axios.get("http://localhost:4040/player/user-players", {
+                const response = await apiClient.get("/player/user-players", {
                     headers: { "auth-header": `${token}` }
                 });
+                
                 this.players = response.data.Players;
             } catch (error) {
-                console.error("Error obteniendo los personajes del usuario:", error.message);
+                this.modalStore.openModal("Error obteniendo los personajes del usuario:", error.message);
             }
         },
+        getClassIcon(playerClass) {
+            return require(`@/assets/icons/${playerClass.toLowerCase()}.svg`);
+        },
+        async showDetails(id) {
+            try {
+                const response = await apiClient.get(`/player/${id}`);
+                
+                this.playerDetails = response.data.Player;
+                this.modalStore.openModal("Detalles del Personaje:", 
+                `<strong>Nombre:</strong> ${this.playerDetails.name} <br> 
+                <strong>Especie:</strong> ${this.playerDetails.species} <br> 
+                <strong>Clase:</strong> ${this.playerDetails.player_class} <br> 
+                <strong>Nivel:</strong> ${this.playerDetails.level}`);
+            } catch (error) {
+                this.modalStore.openModal("Error obteniendo los detalles", error.message);
+            }
+        }
     },
     mounted() {
         this.fetchUserPlayers();
     },
+    components: {
+        AlertComponent
+    }
 };
 </script>
 
-<style>
+<style scoped>
 .character-list {
     display: flex;
     flex-wrap: wrap;
@@ -63,6 +92,14 @@ export default {
 
 .card-img-top {
     height: 200px;
-    object-fit: cover;
+    object-fit: contain;
+    margin-top: 10px;
 }
+
+.buttons{
+    display: flex;
+    justify-self: center;
+    gap: 10px;
+}
+
 </style>

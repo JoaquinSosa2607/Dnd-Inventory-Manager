@@ -1,6 +1,7 @@
 <template>
     <nav class="nav-bar">
         <h2>Bienvenido!</h2>
+        <h2 v-if="inHome">Al inventario de qué personaje quieres acceder?</h2>
         <ul>
             <li><router-link :to="{ name: 'InventoryView'}">Inventario</router-link></li>
         </ul>
@@ -11,6 +12,11 @@
 export default {
     data() {
         return {}
+    },
+    props: {
+        inHome: {
+            type: Boolean
+        }
     }
 };
 </script>
