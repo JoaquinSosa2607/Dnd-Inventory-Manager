@@ -4,6 +4,9 @@
             <h2>Bienvenido!</h2>
             <h2 >Al inventario de qué personaje quieres acceder?</h2>
         </div>
+        <div v-else class="inventory-nav">
+            <h2>Hoja de Inventario de {{ name }}</h2>
+        </div>
     </nav>
 </template>
 
@@ -16,6 +19,9 @@ export default {
         inHome: {
             type: Boolean
         },
+        name: {
+            Required: true
+        }
     }
 };
 </script>
@@ -26,6 +32,14 @@ export default {
         padding: 10px;
         display: flex;
         justify-content: space-between;
+        align-items: center;
+    }
+
+    .inventory-nav {
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 10px;
+        display: flex;
+        justify-content: center;
         align-items: center;
     }
 
