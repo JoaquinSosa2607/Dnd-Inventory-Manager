@@ -20,9 +20,9 @@ export enum Classes {
     Paladin = "Paladín",
     Ranger = "Explorador",
     Rogue = "Pícaro",
-    Sorcerer = "Mago",
+    Sorcerer = "Hechicero",
     Warlock = "Brujo",
-    Wizard = "Hechicero"
+    Wizard = "Mago"
 }
 
 export enum TypeOfArmor {
