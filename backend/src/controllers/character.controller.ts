@@ -56,7 +56,7 @@ export const getAllCharacters = async (req: Request, res: Response) => {
             return;
         }
 
-        res.status(200).json({ Characters: characters });
+        res.status(200).json({ characters: characters });
         return;
     } catch (error) {
         if (error instanceof Error) {
@@ -68,7 +68,7 @@ export const getAllCharacters = async (req: Request, res: Response) => {
 
 export const getCharacterById = async (req: Request, res: Response) => {
     try {
-        const characterId = parseInt(req.params.playerId);
+        const characterId = parseInt(req.params.characterId);
 
         const character = await findCharacterById(characterId);
         if (!character) {
@@ -76,7 +76,7 @@ export const getCharacterById = async (req: Request, res: Response) => {
             return;
         }
 
-        res.status(200).json({ Character: character });
+        res.status(200).json({ character: character });
         return;
     } catch (error) {
         if (error instanceof Error) {
@@ -100,13 +100,13 @@ export const getUserCharacters = async (req: Request, res: Response) => {
             return;
         }
 
-        const userCharacter: Character[] = await findUserCharacters(user.id);
-        if(userCharacter.length === 0) {
+        const userCharacters: Character[] = await findUserCharacters(user.id);
+        if(userCharacters.length === 0) {
             res.status(404).send({ message: "No tienes personajes registrados." });
             return;
         }
 
-        res.status(200).json({ Characters: userCharacter });
+        res.status(200).json({ characters: userCharacters });
         return;
     } catch (error) {
         if (error instanceof Error) {

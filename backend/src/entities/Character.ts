@@ -30,7 +30,7 @@ export class Character {
     @JoinColumn({ name: "campaign_id"})
     campaign: Campaign;
 
-    @ManyToOne(() => User, (user) => user.player)
+    @ManyToOne(() => User, (user) => user.character)
     @JoinColumn({ name: "user_id"})
     user: User;
 }

@@ -33,7 +33,7 @@ export const signInUser = async (req: Request, res: Response) => {
             return;
         }
         const token: ITokenAuthAndRefresh = await tokenSignUser(user);
-        res.status(200).json({ Tokens: { authToken: token.authToken, refreshToken: token.refreshToken } });
+        res.status(200).json({ tokens: { authToken: token.authToken, refreshToken: token.refreshToken } });
         return;
     } catch (error) {
         if (error instanceof Error) {

@@ -9,7 +9,7 @@ export const getAllCampaigns = async (req: Request, res: Response) => {
             res.status(404).send({ message: "No existen campañas registradas." });
             return;
         }
-        res.status(200).json({ Campaigns: campaigns });
+        res.status(200).json({ campaigns: campaigns });
         return;
     } catch (error) {
         if (error instanceof Error) {
