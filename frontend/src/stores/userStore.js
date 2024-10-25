@@ -21,6 +21,9 @@ export const useUserStore = defineStore("user", {
             this.email = "";
             this.isLoggedIn = false;
             this.token = null;
+
+            Cookies.remove("authToken");
+            Cookies.remove("refreshToken");
         },
     },
 
